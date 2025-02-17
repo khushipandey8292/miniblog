@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import Post
 from django.contrib.auth.models import Group
+import datetime
+from django.core.cache import cache
 # Create your views here.
 #home************************************************************
 
@@ -24,7 +26,12 @@ def dashboard(request):
         user=request.user
         full_name=user.get_full_name()
         gps=user.groups.all()
-        return render(request,'dashboard.html',{'posts':posts,'full_name':full_name,'groups':gps})
+        print("Client Name :",full_name)
+        ct=cache.get('count',version=user.pk)
+        print("Login Count : ",ct)
+        now=datetime.datetime.now()
+        print(now)
+        return render(request,'dashboard.html',{'posts':posts,'full_name':full_name,'groups':gps,})
     else:
         return HttpResponseRedirect('/user_login/')
 

@@ -48,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'miniblog_app.middleware.Trackip',
+    'miniblog_app.middleware.LogUserMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'miniblog.urls'
